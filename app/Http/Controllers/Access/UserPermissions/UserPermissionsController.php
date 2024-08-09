@@ -30,7 +30,7 @@ class UserPermissionsController extends Controller
 
     /**
      * @param int $id
-     * @return void
+     * @return JsonResponse
      */
     public function listOne(int $id): JsonResponse
     {

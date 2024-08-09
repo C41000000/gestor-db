@@ -10,13 +10,13 @@ class AuthService
      * @param array $credentials
      * @return JsonResponse
      */
-    public function login(Array $credentials): JsonResponse
+    public function login(Array $credentials): string
     {
         if(!auth()->attempt($credentials))
             abort(401, "Invalid credentials");
 
         $token = auth()->user()->createToken("auth_token");
-        return response()->json(['token' => $token->plainTextToken]);
+        return $token->plainTextToken;
     }
 
     /**
@@ -24,6 +24,6 @@ class AuthService
      */
     public function logout(): JsonResponse{
         auth()->user()->tokens()->delete();
-        return response()->json(['message' => 'Logged out']);
+        return true;
     }
 }

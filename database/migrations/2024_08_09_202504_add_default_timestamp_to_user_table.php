@@ -11,14 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('databases', function (Blueprint $table) {
-           $table->id();
-           $table->string('instance')->unique();
-           $table->string('port');
-           $table->string('host');
-           $table->string('username');
-           $table->string('password');
-           $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'))->change();
         });
     }
 
@@ -27,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::table('user', function (Blueprint $table) {
+            //
+        });
     }
 };

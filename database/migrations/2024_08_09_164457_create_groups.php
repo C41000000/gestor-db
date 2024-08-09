@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('databases', function (Blueprint $table) {
-           $table->id();
-           $table->string('instance')->unique();
-           $table->string('port');
-           $table->string('host');
-           $table->string('username');
-           $table->string('password');
-           $table->timestamps();
+        Schema::create('groups', function (Blueprint $table) {
+            $table->id();
+            $table->string('group_name');
+            $table->enum('status', ['active', 'inactive'])->default('active');
+            $table->timestamps();
         });
     }
 
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('groups');
     }
 };

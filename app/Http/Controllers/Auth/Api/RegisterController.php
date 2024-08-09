@@ -10,15 +10,21 @@ use Illuminate\Http\Request;
 
 class RegisterController extends Controller
 {
+    private RegisterService $registerService;
+    public function __construct()
+    {
+        $this->registerService = new RegisterService();
+    }
+
     /**
      * @param Request $request
      * @param User $user
      * @return JsonResponse
      */
-    public function register(Request $request, User $user): JsonResponse
+    public function register(Request $request): JsonResponse
     {
-        $registerService = new RegisterService();
-
-        return $registerService->store($request->only("name", 'email', 'password'), $user);
+        return response()->json([
+            'user' => $this->registerService->store($request->only("name", 'email', 'password'))
+        ]);
     }
 }

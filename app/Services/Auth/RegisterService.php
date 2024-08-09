@@ -12,11 +12,10 @@ class RegisterService
      * @param User $user
      * @return JsonResponse
      */
-    public function store(Array $userData, User $user): JsonResponse
+    public function store(Array $userData): User
     {
-        if(!$user = $user->create($userData))
+        if(!$user = User::create($userData))
             abort(400, "Invalid data");
-
-        return response()->json(['user' => $user]);
+        return $user;
     }
 }
